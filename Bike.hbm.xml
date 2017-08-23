@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="model.Bike" table="bike" catalog="bike_sale_purchase_db" optimistic-lock="version">
+        <composite-id name="id" class="model.BikeId">
+            <key-property name="regId" type="string">
+                <column name="reg_id" length="20" />
+            </key-property>
+            <key-property name="email" type="string">
+                <column name="email" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="user" class="model.User" update="false" insert="false" fetch="select">
+            <column name="email" length="20" not-null="true" />
+        </many-to-one>
+        <property name="color" type="string">
+            <column name="color" length="20" not-null="true" />
+        </property>
+        <property name="model" type="string">
+            <column name="model" length="30" not-null="true" />
+        </property>
+        <property name="yearOfPro" type="java.lang.Integer">
+            <column name="year_of_pro" not-null="true" />
+        </property>
+        <property name="tempNote" type="string">
+            <column name="temp_note" length="150" />
+        </property>
+        <property name="genCondition" type="string">
+            <column name="gen_condition" length="20" />
+        </property>
+        <property name="photo" type="binary">
+            <column name="photo" />
+        </property>
+        <property name="validityOfReg" type="date">
+            <column name="validity_of_reg" length="10" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="25" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="25" />
+        </property>
+        <property name="mileage" type="java.lang.Integer">
+            <column name="mileage" />
+        </property>
+        <property name="price" type="java.lang.Integer">
+            <column name="price" not-null="true" />
+        </property>
+        <set name="ads" table="ad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reg_id" length="20" not-null="true" />
+                <column name="email" length="20" not-null="true" />
+            </key>
+            <one-to-many class="model.Ad" />
+        </set>
+    </class>
+</hibernate-mapping>

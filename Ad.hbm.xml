@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="model.Ad" table="ad" catalog="bike_sale_purchase_db" optimistic-lock="version">
+        <composite-id name="id" class="model.AdId">
+            <key-property name="adId" type="int">
+                <column name="ad_id" />
+            </key-property>
+            <key-property name="regId" type="string">
+                <column name="reg_id" length="20" />
+            </key-property>
+            <key-property name="email" type="string">
+                <column name="email" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="bike" class="model.Bike" update="false" insert="false" fetch="select">
+            <column name="reg_id" length="20" not-null="true" />
+            <column name="email" length="20" not-null="true" />
+        </many-to-one>
+        <property name="adPostDate" type="timestamp">
+            <column name="ad_post_date" length="19" not-null="true" />
+        </property>
+        <property name="adValidityDate" type="date">
+            <column name="ad_validity_date" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

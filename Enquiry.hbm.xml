@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="model.Enquiry" table="enquiry" catalog="bike_sale_purchase_db" optimistic-lock="version">
+        <id name="enqId" type="java.lang.Integer">
+            <column name="enq_id" />
+            <generator class="identity" />
+        </id>
+        <property name="enqName" type="string">
+            <column name="enq_name" length="40" not-null="true" />
+        </property>
+        <property name="enqEmail" type="string">
+            <column name="enq_email" length="40" not-null="true" />
+        </property>
+        <property name="enqPhoneNo" type="string">
+            <column name="enq_phone_no" length="20" not-null="true" />
+        </property>
+        <property name="enqType" type="string">
+            <column name="enq_type" length="20" not-null="true" />
+        </property>
+        <property name="enqMsg" type="string">
+            <column name="enq_msg" length="200" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
